@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using System.Threading;
+using System.Text;
 
 namespace HangmanGame1
 {
@@ -35,7 +34,7 @@ namespace HangmanGame1
 
             void gameInit()
             {
-              
+
                 int life = 5;
                 int counter = 0;
                 int goodMoves = 0;
@@ -51,9 +50,6 @@ namespace HangmanGame1
                 Random random = new Random();
                 string precapitol = capitols[random.Next(capitols.Count)];
                 string capitol = precapitol.ToUpper();
-
-
-                Console.WriteLine(capitol);
 
 
                 StringBuilder capitolHidden = new StringBuilder();
@@ -76,108 +72,107 @@ namespace HangmanGame1
                 void playingthegame()
                 {
 
-                    
-                   
+
+
                     if (not_in_word.Count == 0)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.Write($"A list of letters which are not correct: ");
+                        foreach (string letters in not_in_word)
                         {
-                            Console.WriteLine();
-                            Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
+                            Console.Write(letters + " ");
                         }
-                        else
-                        {
-                            Console.WriteLine();
-                            Console.Write($"A list of letters which are not correct: ");
-                            foreach (string letters in not_in_word)
-                            {
-                                Console.Write(letters + " ");
-                            }
-                            Console.WriteLine();
-                            Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
-                        }
-                        string a = Console.ReadLine();
+                        Console.WriteLine();
+                        Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
+                    }
+                    string a = Console.ReadLine();
 
-                        switch (a)
-                        {
-                            case "1":
+                    switch (a)
+                    {
+                        case "1":
 
-                                guessLetter();
+                            guessLetter();
+                            break;
 
-                                break;
                         case "2":
                             guessWord();
                             break;
-                            default:
-                                playingthegame();
-                                break;
-                        }
 
-                        void guessLetter()
-                        {
-                            List<int> indexesToReplace = new List<int>();
-                            Console.WriteLine();
-                            Console.WriteLine("Enter the letter");
-                            string preletter = Console.ReadLine();
-                             if (preletter.Length > 1)
+                        default:
+                            playingthegame();
+                            break;
+                    }
+
+                    void guessLetter()
+                    {
+                        List<int> indexesToReplace = new List<int>();
+                        Console.WriteLine();
+                        Console.WriteLine("Enter the letter");
+                        string preletter = Console.ReadLine();
+                        if (preletter.Length > 1)
                         {
                             Console.WriteLine("Please, only 1 letter.");
                             guessLetter();
                         }
 
-                            string letter = preletter.ToUpper();
-                            char letterr = Convert.ToChar(letter);
+                        string letter = preletter.ToUpper();
+                        char letterr = Convert.ToChar(letter);
 
 
-                            if (capitol.Contains(letter))
+                        if (capitol.Contains(letter))
+                        {
+
+                            for (int i = 0; i < capitol.Length; i++)
                             {
-
-                                for (int i = 0; i < capitol.Length; i++)
+                                if (capitol[i] == letterr)
                                 {
-                                    if (capitol[i] == letterr)
-                                    {
-                                        indexesToReplace.Add(i);
-                                    }
+                                    indexesToReplace.Add(i);
                                 }
+                            }
 
 
-                                for (int i = 0; i < indexesToReplace.Count; i++)
-                                {
-                                    int index = indexesToReplace[i];
-                                    capitolHidden.Remove(index, 1);
-                                    capitolHidden.Insert(index, letter);
-                                }
+                            for (int i = 0; i < indexesToReplace.Count; i++)
+                            {
+                                int index = indexesToReplace[i];
+                                capitolHidden.Remove(index, 1);
+                                capitolHidden.Insert(index, letter);
+                            }
 
 
-                                Console.WriteLine();
-                                Console.WriteLine(capitolHidden);
-                                counter++;
-                                goodMoves += indexesToReplace.Count;
+                            Console.WriteLine();
+                            Console.WriteLine(capitolHidden);
+                            counter++;
+                            goodMoves += indexesToReplace.Count;
 
-                                Console.WriteLine(goodMoves);
-                                Console.WriteLine(capitol.Length);
 
                             if (goodMoves < capitol.Length)
                                 playingthegame();
 
                             else winning();
-                            }
-                            else
-                            {
-                                life--;
-                                not_in_word.Add(letter);
-                                Console.WriteLine();
-                                Console.WriteLine(capitolHidden);
-                                counter++;
+                        }
+                        else
+                        {
+                            life--;
+                            not_in_word.Add(letter);
+                            Console.WriteLine();
+                            Console.WriteLine(capitolHidden);
+                            counter++;
 
                             if (life > 0)
                                 playingthegame();
                             else losing();
-                            }
                         }
+                    }
                     void guessWord()
                     {
                         Console.WriteLine();
                         Console.WriteLine("Type whole word: ");
-                        string word = Console.ReadLine();
+                        string word = Console.ReadLine().ToUpper();
                         if (word == capitol)
                         {
                             counter++;
@@ -192,25 +187,25 @@ namespace HangmanGame1
                                 playingthegame();
                             else losing();
                         }
-                    
+
 
                     }
-                
-                  void winning()
+
+                    void winning()
                     {
                         stopwatch.Stop();
                         TimeSpan timeSpan = stopwatch.Elapsed;
                         Console.WriteLine();
                         Console.WriteLine($"Congrats, you win the game in {timeSpan.TotalSeconds} seconds with {counter} moves");
-                      
+
                         start();
                     }
 
                     void losing()
                     {
                         Console.WriteLine();
-                        Console.WriteLine("Srry, you lost your game.");
-                            start();
+                        Console.WriteLine($"Srry, you lost your game. Correct answer was {capitol}");
+                        start();
                     }
                 }
             }
