@@ -1,0 +1,13 @@
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.exe
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.deps.json
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.runtimeconfig.json
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.runtimeconfig.dev.json
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.dll
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\bin\Debug\netcoreapp3.1\HangmanGame1.pdb
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.csprojAssemblyReference.cache
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.AssemblyInfoInputs.cache
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.AssemblyInfo.cs
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.csproj.CoreCompileInputs.cache
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.dll
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.pdb
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts1-6\HangmanGame1\obj\Debug\netcoreapp3.1\HangmanGame1.genruntimeconfig.cache

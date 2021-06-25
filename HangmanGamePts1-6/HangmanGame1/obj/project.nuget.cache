@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8/tAV/fGoJBK1IOVseN50GaOcFx9Z39M34WzZbn/VNXp+7oHVN17TpBfNTPgR7LIJxKgQnJZThkti3c+LIv/yg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sniqq\\Desktop\\HangmanGame\\HangmanGamePts1-6\\HangmanGame1\\HangmanGame1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sniqq\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}
