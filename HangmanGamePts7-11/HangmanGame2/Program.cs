@@ -64,19 +64,19 @@ namespace HangmanGame2
                     string[] cityCountry = randomPair.Split('|', StringSplitOptions.RemoveEmptyEntries);
                     string precountry = cityCountry[0].Trim();
                     string country = precountry.ToUpper();
-                    string precapitol = cityCountry[1].Trim();
-                    string capitol = precapitol.ToUpper();
+                    string precapital = cityCountry[1].Trim();
+                    string capital = precapital.ToUpper();
 
-                    StringBuilder capitolHidden = new StringBuilder();
+                    StringBuilder capitalHidden = new StringBuilder();
 
-                    for (int i = 0; i < capitol.Length; i++)
+                    for (int i = 0; i < capital.Length; i++)
                     {
-                        capitolHidden.Append("_");
+                        capitalHidden.Append("_");
                     }
 
                     
                     Console.WriteLine();
-                    Console.WriteLine(capitolHidden);
+                    Console.WriteLine(capitalHidden);
 
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
@@ -142,12 +142,12 @@ namespace HangmanGame2
                             char letterr = Convert.ToChar(letter);
 
 
-                            if (capitol.Contains(letter))
+                            if (capital.Contains(letter))
                             {
 
-                                for (int i = 0; i < capitol.Length; i++)
+                                for (int i = 0; i < capital.Length; i++)
                                 {
-                                    if (capitol[i] == letterr)
+                                    if (capital[i] == letterr)
                                     {
                                         indexesToReplace.Add(i);
                                     }
@@ -157,18 +157,18 @@ namespace HangmanGame2
                                 for (int i = 0; i < indexesToReplace.Count; i++)
                                 {
                                     int index = indexesToReplace[i];
-                                    capitolHidden.Remove(index, 1);
-                                    capitolHidden.Insert(index, letter);
+                                    capitalHidden.Remove(index, 1);
+                                    capitalHidden.Insert(index, letter);
                                 }
 
 
                                 Console.WriteLine();
-                                Console.WriteLine(capitolHidden);
+                                Console.WriteLine(capitalHidden);
                                 counter++;
                                 goodMoves += indexesToReplace.Count;
 
 
-                                if (goodMoves < capitol.Length)
+                                if (goodMoves < capital.Length)
                                     playingthegame();
 
                                 else winning();
@@ -179,7 +179,7 @@ namespace HangmanGame2
                                 not_in_word.Add(letter);
                                 hangmanArt();                               // 11. OPTIONAL Add ASCII art!       
                                 Console.WriteLine();
-                                Console.WriteLine(capitolHidden);
+                                Console.WriteLine(capitalHidden);
                                 counter++;
 
                                 if (life > 0)  //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
@@ -199,7 +199,7 @@ namespace HangmanGame2
                             Console.WriteLine();
                             Console.WriteLine("Type whole word: ");
                             string word = Console.ReadLine().ToUpper();
-                            if (word == capitol)
+                            if (word == capital)
                             {
                                 counter++;
                                 winning();
@@ -231,7 +231,7 @@ namespace HangmanGame2
                             stopwatch.Stop();
                             TimeSpan timeSpan = stopwatch.Elapsed;
                             Console.WriteLine();
-                            Console.WriteLine($"YES! {capitol} is a capitol of {country}");
+                            Console.WriteLine($"YES! {capital} is a capital of {country}");
 
 
                             Console.WriteLine($"Congrats, you win the game in {timeSpan.TotalSeconds} seconds with {counter} moves");
@@ -270,7 +270,7 @@ namespace HangmanGame2
                                     writetext.Write($"{name}" + " | ");
                                     writetext.Write($"{counter}" + " | ");
                                     writetext.Write($"{dateTime}" + " | ");
-                                    writetext.WriteLine($"{capitol}");
+                                    writetext.WriteLine($"{capital}");
                                 }
                                 Console.WriteLine("Score export to the file");
                                 Console.WriteLine();
@@ -285,7 +285,7 @@ namespace HangmanGame2
                         void losing()
                         {
                             Console.WriteLine();
-                            Console.WriteLine($"Srry, you lost your game. Correct answer was {capitol}, the capitol of {country}");
+                            Console.WriteLine($"Srry, you lost your game. Correct answer was {capital}, the capital of {country}");
                             Console.WriteLine();
                             highscores();                                                                   //10. OPTIONAL Expand high score - program should remember 10 best scores (read
                             Console.WriteLine();                                                            //from and write to file) and display them at the end, after success / failure
@@ -301,18 +301,18 @@ namespace HangmanGame2
                                 char[] delims = new[] { '\r', '\n' };
                                 string[] allScores = readText.Split(delims, StringSplitOptions.RemoveEmptyEntries);
 
-
+                                    
                                 var top10 = (from h in allScores
                                              orderby h.ElementAt(0)
                                              select h).Take(10);
 
-
+                         
 
                                 Console.WriteLine();
                                 Console.WriteLine("Top 10 scores sorted by seconds");
                                 Console.WriteLine();
                                 Console.WriteLine("Legenda:");
-                                Console.WriteLine("Seconds |Name   |  Moves  | Date | Capitol ");
+                                Console.WriteLine("Seconds |Name |Moves |Date |Capital ");
                                 foreach (var item in top10)
                                 {
                                     Console.WriteLine(item);

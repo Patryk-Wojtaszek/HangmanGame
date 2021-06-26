@@ -37,7 +37,7 @@ namespace HangmanGame1
                 // 1.Create a list of European capitals, pick one of them randomly and let the user guess it. At the beginning the program should represent each letter as a dash
                 //__("_")__ and display them at the screen.Additionally, the program should
                 //show the player's life points (let's say, 5).
-                List<string> capitols = new List<string> {"Tirana","Andorra","Yerevan","Vienna","Baku","Minsk","Brussels",
+                List<string> capitals = new List<string> {"Tirana","Andorra","Yerevan","Vienna","Baku","Minsk","Brussels",
                     "Sarajevo","Sofia","Zagreb","Nicosia","Prague","Copenhagen","Tallinn","Helsinki","Paris","Tbilisi","Berlin",
                     "Athens","Budapest","Reykjavik","Dublin","Rome","Pristina","Riga","Vaduz","Vilnius","Luxembourg","Valletta",
                     "Chisinau","Monaco","Podgorica","Amsterdam","Skopje","Oslo","Warsaw","Lisbon","Bucharest","Moscow",
@@ -56,20 +56,20 @@ namespace HangmanGame1
 
 
                 Random random = new Random();
-                string precapitol = capitols[random.Next(capitols.Count)];
-                string capitol = precapitol.ToUpper();                  // it was a difference between "a" and "A" , so i decided to make only big letters.
+                string precapital = capitals[random.Next(capitals.Count)];
+                string capital = precapital.ToUpper();                  // it was a difference between "a" and "A" , so i decided to make only big letters.
 
 
-                StringBuilder capitolHidden = new StringBuilder();
+                StringBuilder capitalHidden = new StringBuilder();
 
-                for (int i = 0; i < capitol.Length; i++)
+                for (int i = 0; i < capital.Length; i++)
                 {
-                    capitolHidden.Append("_");
+                    capitalHidden.Append("_");
                 }
 
 
                 Console.WriteLine();
-                Console.WriteLine(capitolHidden);
+                Console.WriteLine(capitalHidden);
 
                 Stopwatch stopwatch = new Stopwatch();  // 6. OPTIONAL Add an information about guessing count and guessing time at the  end of game
                 stopwatch.Start();
@@ -139,12 +139,12 @@ namespace HangmanGame1
                         char letterr = Convert.ToChar(letter); // making char to compare it with all chars in the capitol in next if
 
 
-                        if (capitol.Contains(letter))
+                        if (capital.Contains(letter))
                         {
 
-                            for (int i = 0; i < capitol.Length; i++)
+                            for (int i = 0; i < capital.Length; i++)
                             {
-                                if (capitol[i] == letterr)
+                                if (capital[i] == letterr)
                                 {
                                     indexesToReplace.Add(i);        
                                 }
@@ -154,18 +154,18 @@ namespace HangmanGame1
                             for (int i = 0; i < indexesToReplace.Count; i++)
                             {
                                 int index = indexesToReplace[i];
-                                capitolHidden.Remove(index, 1);
-                                capitolHidden.Insert(index, letter);
+                                capitalHidden.Remove(index, 1);
+                                capitalHidden.Insert(index, letter);
                             }
 
 
                             Console.WriteLine();
-                            Console.WriteLine(capitolHidden);
+                            Console.WriteLine(capitalHidden);
                             counter++;
                             goodMoves += indexesToReplace.Count; //eg. in word WARSAW you have 2xA so in one move "A" you get 2 good moves 
 
 
-                            if (goodMoves < capitol.Length) //4. If the player guesses the final letter or whole word(s) - he/she is the winner!
+                            if (goodMoves < capital.Length) //4. If the player guesses the final letter or whole word(s) - he/she is the winner!
                                                             // if good moves reach the capital length you win the game 
 
                                 playingthegame();
@@ -178,7 +178,7 @@ namespace HangmanGame1
                             not_in_word.Add(letter);       // 3. If the player survives a wrong letter guess - that letter should be added to the
                                                            //"not-in-word" list and displayed on the screen.
                             Console.WriteLine();
-                            Console.WriteLine(capitolHidden);
+                            Console.WriteLine(capitalHidden);
                             counter++;
 
                             if (life > 0)               // 2. (...) If this action brings player life to zero - the game is over!
@@ -191,7 +191,7 @@ namespace HangmanGame1
                         Console.WriteLine();
                         Console.WriteLine("Type whole word: ");
                         string word = Console.ReadLine().ToUpper();
-                        if (word == capitol)
+                        if (word == capital)
                         {
                             counter++;
                             winning();
@@ -226,7 +226,7 @@ namespace HangmanGame1
                     void losing()
                     {
                         Console.WriteLine();
-                        Console.WriteLine($"Srry, you lost your game. Correct answer was {capitol}");
+                        Console.WriteLine($"Srry, you lost your game. Correct answer was {capital}");
                         start();  // 5. Add a question about restarting the program after wins or loses.
                                   //  start shows "Enter 1 to turn on the game, 0 to exit"
 
