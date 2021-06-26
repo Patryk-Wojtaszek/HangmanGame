@@ -23,6 +23,8 @@ namespace HangmanGame2
                 remembered - if player will reached his/her life points program should display a
                 hint (i.e. "The capital of Poland")
                    */
+           
+
             string text = System.IO.File.ReadAllText(@"C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\countries_and_capitals.txt");
             char[] delims = new[] { '\r', '\n' };
             string[] capitalsAndCountries = text.Split(delims, StringSplitOptions.RemoveEmptyEntries);
@@ -50,318 +52,318 @@ namespace HangmanGame2
 
             }
             void gameInit()
-            {
-
-                int life = 5;
-                int counter = 0;
-                int goodMoves = 0;
-                List<string> not_in_word = new List<string>();
-
-                Random random = new Random();
-                string randomPair = capitalsAndCountries[random.Next(capitalsAndCountries.Length)];
-                string[] cityCountry = randomPair.Split('|', StringSplitOptions.RemoveEmptyEntries);
-                string precountry = cityCountry[0].Trim();
-                string country = precountry.ToUpper();
-                string precapitol = cityCountry[1].Trim();
-                string capitol = precapitol.ToUpper();
-
-                StringBuilder capitolHidden = new StringBuilder();
-
-                for (int i = 0; i < capitol.Length; i++)
-                {
-                    capitolHidden.Append("_");
-                }
-
-                Console.WriteLine(capitol);
-                Console.WriteLine();
-                Console.WriteLine(capitolHidden);
-
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-                playingthegame();
-
-                void playingthegame()
                 {
 
+                    int life = 5;
+                    int counter = 0;
+                    int goodMoves = 0;
+                    List<string> not_in_word = new List<string>();
 
+                    Random random = new Random();
+                    string randomPair = capitalsAndCountries[random.Next(capitalsAndCountries.Length)];
+                    string[] cityCountry = randomPair.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                    string precountry = cityCountry[0].Trim();
+                    string country = precountry.ToUpper();
+                    string precapitol = cityCountry[1].Trim();
+                    string capitol = precapitol.ToUpper();
 
-                    if (not_in_word.Count == 0)
+                    StringBuilder capitolHidden = new StringBuilder();
+
+                    for (int i = 0; i < capitol.Length; i++)
                     {
-                        Console.WriteLine();
-                        Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
-                    }
-                    else
-                    {
-                        Console.WriteLine();
-                        Console.Write($"A list of letters which are not correct: ");
-                        foreach (string letters in not_in_word)
-                        {
-                            Console.Write(letters + " ");
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
-                    }
-                    string a = Console.ReadLine();
-
-                    switch (a)
-                    {
-                        case "1":
-
-                            guessLetter();
-                            break;
-
-                        case "2":
-                            guessWord();
-                            break;
-
-                        default:
-                            playingthegame();
-                            break;
+                        capitolHidden.Append("_");
                     }
 
-                    void guessLetter()
+                    
+                    Console.WriteLine();
+                    Console.WriteLine(capitolHidden);
+
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    playingthegame();
+
+                    void playingthegame()
                     {
-                        List<int> indexesToReplace = new List<int>();
-                        Console.WriteLine();
-                        Console.WriteLine("Enter the letter");
-                        string preletter = Console.ReadLine();
-                        if (preletter.Length > 1)
+
+
+
+                        if (not_in_word.Count == 0)
                         {
-                            Console.WriteLine("Please, only 1 letter.");
-                            guessLetter();
-                        }
-
-                        string letter = preletter.ToUpper();
-                        if (not_in_word.Contains(letter))
-                        {
-                            Console.WriteLine("This letter is already used. Please type another letter");
-                            guessLetter();
-                        }
-                        char letterr = Convert.ToChar(letter);
-
-
-                        if (capitol.Contains(letter))
-                        {
-
-                            for (int i = 0; i < capitol.Length; i++)
-                            {
-                                if (capitol[i] == letterr)
-                                {
-                                    indexesToReplace.Add(i);
-                                }
-                            }
-
-
-                            for (int i = 0; i < indexesToReplace.Count; i++)
-                            {
-                                int index = indexesToReplace[i];
-                                capitolHidden.Remove(index, 1);
-                                capitolHidden.Insert(index, letter);
-                            }
-
-
                             Console.WriteLine();
-                            Console.WriteLine(capitolHidden);
-                            counter++;
-                            goodMoves += indexesToReplace.Count;
-
-
-                            if (goodMoves < capitol.Length)
-                                playingthegame();
-
-                            else winning();
+                            Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
                         }
                         else
                         {
-                            life--;
-                            not_in_word.Add(letter);
-                            hangmanArt();                               // 11. OPTIONAL Add ASCII art!       
                             Console.WriteLine();
-                            Console.WriteLine(capitolHidden);
-                            counter++;
-
-                            if (life > 0)  //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
+                            Console.Write($"A list of letters which are not correct: ");
+                            foreach (string letters in not_in_word)
                             {
-                                if (life == 1)
-                                {
-                                    Console.WriteLine();
-                                    Console.WriteLine($"HINT ! The capitol of {country}");
-                                }
-                                playingthegame();
+                                Console.Write(letters + " ");
                             }
-                            else losing();
+                            Console.WriteLine();
+                            Console.WriteLine($"Enter 1 to guess a letter or 2 to guess a whole word. You have {life} life points left");
                         }
-                    }
-                    void guessWord()
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("Type whole word: ");
-                        string word = Console.ReadLine().ToUpper();
-                        if (word == capitol)
-                        {
-                            counter++;
-                            winning();
-                        }
-                        else
-                        {
-                            Console.WriteLine("It isn't correct anwswer :( ");
-                            counter++;
-                            life -= 2;
-                            hangmanArt();                                   // 11. OPTIONAL Add ASCII art! 
-                            if (life > 0)       
-                            {
-                                if (life == 1)
-                                {
-                                    Console.WriteLine();       //8. Guessing the whole word should be more-risk-more-reward(...) failing the whole word guess should result in losing 2 life points!
-                                                                 //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
-                                    Console.WriteLine($"HINT ! The capitol of {country}");
-                                }
-                                playingthegame();
-                            }
-                            else losing();
-                        }
-
-
-                    }
-
-                    void winning()
-                    {
-                        stopwatch.Stop();
-                        TimeSpan timeSpan = stopwatch.Elapsed;
-                        Console.WriteLine();
-                        Console.WriteLine($"YES! {capitol} is a capitol of {country}"); 
-
-
-                        Console.WriteLine($"Congrats, you win the game in {timeSpan.TotalSeconds} seconds with {counter} moves");
-                        Console.WriteLine();
-                        highscores();                                                   //10. OPTIONAL Expand high score - program should remember 10 best scores (read
-                                                                                        // from and write to file) and display them at the end, after success / failure
-                        Console.WriteLine();
-                        Console.WriteLine("Do you want to save your score? Enter Y ");   // 9.Add a high score
                         string a = Console.ReadLine();
-                        
-                        switch(a)
+
+                        switch (a)
                         {
-                            case "y":
-                            case "Y":
-                                saveScore();  // 9.Add a high score
+                            case "1":
+
+                                guessLetter();
                                 break;
-                         
+
+                            case "2":
+                                guessWord();
+                                break;
+
                             default:
-                                start();
+                                playingthegame();
                                 break;
                         }
-                        void saveScore()   // // 9.Add a high score
+
+                        void guessLetter()
                         {
-                            
-                            DateTime dateTime = DateTime.Now;
+                            List<int> indexesToReplace = new List<int>();
                             Console.WriteLine();
-                            Console.WriteLine("Please type your name: ");
-                            string name = Console.ReadLine();
-
-                            
-                            
-
-                            using (StreamWriter writetext = new StreamWriter("write.txt", true))
-                            {  
-                                writetext.Write($"{timeSpan.TotalSeconds}" + " | ");
-                                writetext.Write($"{name}" +" | ");
-                                writetext.Write($"{counter}" + " | ");
-                                writetext.Write($"{dateTime}" + " | ");
-                                writetext.WriteLine($"{capitol}");
-                            }
-                            Console.WriteLine("Score export to the file");
-                            Console.WriteLine();
-                            start();
-
-                        }
-
-
-                    }
-                       
-
-                    void losing()
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine($"Srry, you lost your game. Correct answer was {capitol}, the capitol of {country}");
-                        Console.WriteLine();
-                        highscores();                                                                   //10. OPTIONAL Expand high score - program should remember 10 best scores (read
-                        Console.WriteLine();                                                            //from and write to file) and display them at the end, after success / failure
-                        start();
-                    }
-
-                    void highscores()                                                                      // 10.
-                    {
-                        using (StreamReader readtext = new StreamReader("write.txt"))
-                        {
-                            string readText = readtext.ReadToEnd();
-
-                            char[] delims = new[] { '\r', '\n' };
-                            string[] allScores = readText.Split(delims, StringSplitOptions.RemoveEmptyEntries);
-
-
-                            var top10 = (from h in allScores
-                                         orderby h.ElementAt(0) 
-                                         select h).Take(10);
-
-                            
-
-                            Console.WriteLine();
-                            Console.WriteLine("Top 10 scores sorted by seconds");
-                            Console.WriteLine();
-                            Console.WriteLine("Legenda:");
-                            Console.WriteLine("Seconds |Name   |  Moves  | Date | Capitol ");
-                            foreach (var item in top10)
+                            Console.WriteLine("Enter the letter");
+                            string preletter = Console.ReadLine();
+                            if (preletter.Length > 1)
                             {
-                                Console.WriteLine(item);
+                                Console.WriteLine("Please, only 1 letter.");
+                                guessLetter();
                             }
 
-                        }
-                      
-                        
-                    }
-                     void hangmanArt()                                                  // 11. OPTIONAL Add ASCII art! 
-                    {
-                       if (life==4)
-                       {
-                            string art = " +---+\n |   |\n     |\n     |\n     |\n     |\n========='''";
-                            Console.WriteLine();
-                            Console.WriteLine(art);
-                       }
+                            string letter = preletter.ToUpper();
+                            if (not_in_word.Contains(letter))
+                            {
+                                Console.WriteLine("This letter is already used. Please type another letter");
+                                guessLetter();
+                            }
+                            char letterr = Convert.ToChar(letter);
 
-                       else if (life ==3)
+
+                            if (capitol.Contains(letter))
+                            {
+
+                                for (int i = 0; i < capitol.Length; i++)
+                                {
+                                    if (capitol[i] == letterr)
+                                    {
+                                        indexesToReplace.Add(i);
+                                    }
+                                }
+
+
+                                for (int i = 0; i < indexesToReplace.Count; i++)
+                                {
+                                    int index = indexesToReplace[i];
+                                    capitolHidden.Remove(index, 1);
+                                    capitolHidden.Insert(index, letter);
+                                }
+
+
+                                Console.WriteLine();
+                                Console.WriteLine(capitolHidden);
+                                counter++;
+                                goodMoves += indexesToReplace.Count;
+
+
+                                if (goodMoves < capitol.Length)
+                                    playingthegame();
+
+                                else winning();
+                            }
+                            else
+                            {
+                                life--;
+                                not_in_word.Add(letter);
+                                hangmanArt();                               // 11. OPTIONAL Add ASCII art!       
+                                Console.WriteLine();
+                                Console.WriteLine(capitolHidden);
+                                counter++;
+
+                                if (life > 0)  //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
+                                {
+                                    if (life == 1)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine($"HINT ! The capitol of {country}");
+                                    }
+                                    playingthegame();
+                                }
+                                else losing();
+                            }
+                        }
+                        void guessWord()
                         {
-                            string art = " +---+\n |   |\n O   |\n     |\n     |\n     |\n========='''";
                             Console.WriteLine();
-                            Console.WriteLine(art);
+                            Console.WriteLine("Type whole word: ");
+                            string word = Console.ReadLine().ToUpper();
+                            if (word == capitol)
+                            {
+                                counter++;
+                                winning();
+                            }
+                            else
+                            {
+                                Console.WriteLine("It isn't correct anwswer :( ");
+                                counter++;
+                                life -= 2;
+                                hangmanArt();                                   // 11. OPTIONAL Add ASCII art! 
+                                if (life > 0)
+                                {
+                                    if (life == 1)
+                                    {
+                                        Console.WriteLine();       //8. Guessing the whole word should be more-risk-more-reward(...) failing the whole word guess should result in losing 2 life points!
+                                                                   //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
+                                        Console.WriteLine($"HINT ! The capitol of {country}");
+                                    }
+                                    playingthegame();
+                                }
+                                else losing();
+                            }
+
+
                         }
 
-                       else if (life ==2)
+                        void winning()
                         {
-                            string art = " +---+\n |   |\n O   |\n |   |\n     |\n     |\n========='''";
+                            stopwatch.Stop();
+                            TimeSpan timeSpan = stopwatch.Elapsed;
                             Console.WriteLine();
-                            Console.WriteLine(art);
+                            Console.WriteLine($"YES! {capitol} is a capitol of {country}");
+
+
+                            Console.WriteLine($"Congrats, you win the game in {timeSpan.TotalSeconds} seconds with {counter} moves");
+                            Console.WriteLine();
+                            highscores();                                                   //10. OPTIONAL Expand high score - program should remember 10 best scores (read
+                                                                                            // from and write to file) and display them at the end, after success / failure
+                            Console.WriteLine();
+                            Console.WriteLine("Do you want to save your score? Enter Y ");   // 9.Add a high score
+                            string a = Console.ReadLine();
+
+                            switch (a)
+                            {
+                                case "y":
+                                case "Y":
+                                    saveScore();  // 9.Add a high score
+                                    break;
+
+                                default:
+                                    start();
+                                    break;
+                            }
+                            void saveScore()   // // 9.Add a high score
+                            {
+
+                                DateTime dateTime = DateTime.Now;
+                                Console.WriteLine();
+                                Console.WriteLine("Please type your name: ");
+                                string name = Console.ReadLine();
+
+
+
+
+                                using (StreamWriter writetext = new StreamWriter("write.txt", true))
+                                {
+                                    writetext.Write($"{timeSpan.TotalSeconds}" + " | ");
+                                    writetext.Write($"{name}" + " | ");
+                                    writetext.Write($"{counter}" + " | ");
+                                    writetext.Write($"{dateTime}" + " | ");
+                                    writetext.WriteLine($"{capitol}");
+                                }
+                                Console.WriteLine("Score export to the file");
+                                Console.WriteLine();
+                                start();
+
+                            }
+
+
                         }
-                       else if (life ==1)
+
+
+                        void losing()
                         {
-                            string art = " +---+\n |   |\n O   |\n/|\\  |\n     |\n     |\n========='''";
                             Console.WriteLine();
-                            Console.WriteLine(art);
+                            Console.WriteLine($"Srry, you lost your game. Correct answer was {capitol}, the capitol of {country}");
+                            Console.WriteLine();
+                            highscores();                                                                   //10. OPTIONAL Expand high score - program should remember 10 best scores (read
+                            Console.WriteLine();                                                            //from and write to file) and display them at the end, after success / failure
+                            start();
                         }
-                       else if (life <1)
+
+                        void highscores()                                                                      // 10.
                         {
-                            string art = " +---+\n |   |\n O   |\n/|\\  |\n/ \\  |\n     |\n========='''";
-                            Console.WriteLine();
-                            Console.WriteLine(art);
+                            using (StreamReader readtext = new StreamReader("write.txt"))
+                            {
+                                string readText = readtext.ReadToEnd();
+
+                                char[] delims = new[] { '\r', '\n' };
+                                string[] allScores = readText.Split(delims, StringSplitOptions.RemoveEmptyEntries);
+
+
+                                var top10 = (from h in allScores
+                                             orderby h.ElementAt(0)
+                                             select h).Take(10);
+
+
+
+                                Console.WriteLine();
+                                Console.WriteLine("Top 10 scores sorted by seconds");
+                                Console.WriteLine();
+                                Console.WriteLine("Legenda:");
+                                Console.WriteLine("Seconds |Name   |  Moves  | Date | Capitol ");
+                                foreach (var item in top10)
+                                {
+                                    Console.WriteLine(item);
+                                }
+
+                            }
+
+
+                        }
+                        void hangmanArt()                                                  // 11. OPTIONAL Add ASCII art! 
+                        {
+                            if (life == 4)
+                            {
+                                string art = " +---+\n |   |\n     |\n     |\n     |\n     |\n========='''";
+                                Console.WriteLine();
+                                Console.WriteLine(art);
+                            }
+
+                            else if (life == 3)
+                            {
+                                string art = " +---+\n |   |\n O   |\n     |\n     |\n     |\n========='''";
+                                Console.WriteLine();
+                                Console.WriteLine(art);
+                            }
+
+                            else if (life == 2)
+                            {
+                                string art = " +---+\n |   |\n O   |\n |   |\n     |\n     |\n========='''";
+                                Console.WriteLine();
+                                Console.WriteLine(art);
+                            }
+                            else if (life == 1)
+                            {
+                                string art = " +---+\n |   |\n O   |\n/|\\  |\n     |\n     |\n========='''";
+                                Console.WriteLine();
+                                Console.WriteLine(art);
+                            }
+                            else if (life < 1)
+                            {
+                                string art = " +---+\n |   |\n O   |\n/|\\  |\n/ \\  |\n     |\n========='''";
+                                Console.WriteLine();
+                                Console.WriteLine(art);
+                            }
                         }
                     }
+
+
+
+
                 }
-            
-        
-
-
-
-    }
+    
         }
     }
 }
