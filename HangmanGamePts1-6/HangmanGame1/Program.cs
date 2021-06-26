@@ -131,6 +131,11 @@ namespace HangmanGame1
                         }
 
                         string letter = preletter.ToUpper();
+                        if (not_in_word.Contains(letter))
+                        {
+                            Console.WriteLine("This letter is already used. Please type another letter");
+                            guessLetter();
+                        }
                         char letterr = Convert.ToChar(letter); // making char to compare it with all chars in the capitol in next if
 
 
