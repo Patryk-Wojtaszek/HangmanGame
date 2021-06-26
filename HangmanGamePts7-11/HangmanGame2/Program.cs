@@ -11,6 +11,17 @@ namespace HangmanGame2
     {
         static void Main(string[] args)
         {
+
+            // i make comments only to pts 7-11. Pts 1-6 are commented in previous version.
+
+
+            /*  There is a file attached ”countries-and-capitals.txt" containing a list of
+                countries and their capitals (i.e. Poland | Warsaw). Your program should read
+                that file at the beginning and randomly select one country-capital pair. Then,
+                the capital should be the target word(s) to guess. The country should also be
+                remembered - if player will reached his/her life points program should display a
+                hint (i.e. "The capital of Poland")
+                   */
             string text = System.IO.File.ReadAllText(@"C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\countries_and_capitals.txt");
             char[] delims = new[] { '\r', '\n' };
             string[] capitalsAndCountries = text.Split(delims, StringSplitOptions.RemoveEmptyEntries);
@@ -163,8 +174,15 @@ namespace HangmanGame2
                             Console.WriteLine(capitolHidden);
                             counter++;
 
-                            if (life > 0)
+                            if (life > 0)  //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
+                            {
+                                if (life == 1)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine($"HINT ! The capitol of {country}");
+                                }
                                 playingthegame();
+                            }
                             else losing();
                         }
                     }
@@ -182,9 +200,16 @@ namespace HangmanGame2
                         {
                             Console.WriteLine("It isn't correct anwswer :( ");
                             counter++;
-                            life -= 2;
-                            if (life > 0)
+                            life -= 2;           //8. Guessing the whole word should be more-risk-more-reward(...) failing the whole word guess should result in losing 2 life points!
+                            if (life > 0)       //The country should also be remembered - if player will reached his / her life points program should display a hint(i.e. "The capital of Poland")
+                            {
+                                if (life == 1)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine($"HINT ! The capitol of {country}");
+                                }
                                 playingthegame();
+                            }
                             else losing();
                         }
 
@@ -196,23 +221,25 @@ namespace HangmanGame2
                         stopwatch.Stop();
                         TimeSpan timeSpan = stopwatch.Elapsed;
                         Console.WriteLine();
-                        Console.WriteLine($"YES! {capitol} is a capitol of {country}");
+                        Console.WriteLine($"YES! {capitol} is a capitol of {country}"); 
+
+
                         Console.WriteLine($"Congrats, you win the game in {timeSpan.TotalSeconds} seconds with {counter} moves");
-                        Console.WriteLine("Do you want to save your score? Enter Y ");
+                        Console.WriteLine("Do you want to save your score? Enter Y ");   // 9.Add a high score
                         string a = Console.ReadLine();
                         
                         switch(a)
                         {
                             case "y":
                             case "Y":
-                                saveScore();
+                                saveScore();  // 9.Add a high score
                                 break;
                          
                             default:
                                 start();
                                 break;
                         }
-                        void saveScore()
+                        void saveScore()   // // 9.Add a high score
                         {
                             
                             DateTime dateTime = DateTime.Now;

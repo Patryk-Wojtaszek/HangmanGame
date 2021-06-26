@@ -10,3 +10,4 @@ C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\obj\Debug\net
 C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\obj\Debug\netcoreapp3.1\HangmanGame2.dll
 C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\obj\Debug\netcoreapp3.1\HangmanGame2.pdb
 C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\obj\Debug\netcoreapp3.1\HangmanGame2.genruntimeconfig.cache
+C:\Users\sniqq\Desktop\HangmanGame\HangmanGamePts7-11\HangmanGame2\obj\Debug\netcoreapp3.1\HangmanGame2.csprojAssemblyReference.cache
